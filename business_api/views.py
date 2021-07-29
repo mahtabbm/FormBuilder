@@ -101,7 +101,6 @@ class PartViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         """Sets the user profile to the logged in user"""
-        print(self.request.data['form'])
         serializer.save()
 
 

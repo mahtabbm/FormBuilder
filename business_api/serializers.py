@@ -55,7 +55,7 @@ class PartSerializer(serializers.ModelSerializer):
         fields = ('id', 'title', 'description', 'is_char',
                   'is_int', 'is_datetime', 'is_file', 'is_decimal',
                   'is_date', 'form')
-        extra_kwargs = {'form': {'read_only': True}}
+        #extra_kwargs = {'form': {'read_only': True}}
 
 
 class OptionSerializer(serializers.ModelSerializer):
