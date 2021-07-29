@@ -11,13 +11,25 @@ class AccessOwnProfile(permissions.BasePermission):
 
         return obj.id == request.user.id
 
-
+"""
 class UpdateOwnStatus(permissions.BasePermission):
-    """Allow users to update their own status"""
+    #Allow users to update their own status
 
     def has_object_permission(self, request, view, obj):
-        """Check the user is trying to update their own status"""
+        #Check the user is trying to update their own status
         if request.method is permissions.SAFE_METHODS:
             return True
 
         return obj.business.id == request.user.id
+"""
+
+
+class AccessOwnFormPart(permissions.BasePermission):
+    """Allow forms to update their own parts"""
+
+    def has_object_permission(self, request, view, obj):
+        """Check the form is trying to update their own part"""
+        if request.method is permissions.SAFE_METHODS:
+            return True
+
+        return obj.form.id == request.form.id

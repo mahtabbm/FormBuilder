@@ -11,7 +11,7 @@ router = DefaultRouter()
 router.register('register', views.RegisterViewSet)
 #router.register('feed', views.BusinessFeedViewSet)
 router.register('form', views.FormViewSet)
-#router.register('part', views.PartViewSet)
+router.register('part', views.PartViewSet)
 #router.register('option', views.OptionViewSet)
 
 urlpatterns = [

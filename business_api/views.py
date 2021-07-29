@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import status, viewsets, mixins
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -54,7 +54,7 @@ class BusinessFeedViewSet(viewsets.ModelViewSet):
     queryset = models.BusinessFeedItem.objects.all()
 
     permission_classes = (
-        permissions.AccessOwnProfile,
+        permissions.UpdateOwnStatus,
         IsAuthenticated
     )
     filter_backends = (filters.SearchFilter,)
@@ -83,5 +83,25 @@ class FormViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         """Sets the user profile to the logged in user"""
         serializer.save(business=self.request.user)
+
+
+class PartViewSet(viewsets.ModelViewSet):
+    """Handles creating, reading and updating part"""
+    authentication_classes = (TokenAuthentication,)
+    serializer_class = serializers.PartSerializer
+    queryset = models.Part.objects.all()
+
+    permission_classes = (
+        permissions.AccessOwnFormPart,
+        IsAuthenticatedOrReadOnly
+    )
+
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('title', 'description')
+
+    def perform_create(self, serializer):
+        """Sets the user profile to the logged in user"""
+        print(self.request.data['form'])
+        serializer.save()
 
 
