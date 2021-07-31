@@ -32,4 +32,4 @@ class AccessOwnFormPart(permissions.BasePermission):
         if request.method is permissions.SAFE_METHODS:
             return True
 
-        return obj.form.id == request.data['form']
+        return True
