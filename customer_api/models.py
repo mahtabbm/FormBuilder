@@ -2,6 +2,8 @@ from django.db import models
 
 
 # Create your models here.
+from django.utils.datetime_safe import datetime
+
 from business_api.models import Form, Part, Option
 
 
@@ -9,6 +11,8 @@ class Customer(models.Model):
     name = models.CharField(max_length=255)
 
     form = models.ForeignKey(Form, on_delete=models.CASCADE)
+
+    created_on = models.DateTimeField(default=datetime.now, blank=True)
 
     def __str__(self):
         return self.name
